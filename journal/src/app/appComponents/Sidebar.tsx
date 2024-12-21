@@ -1,21 +1,23 @@
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Github, Linkedin, Twitter } from 'lucide-react'
 import React from 'react'
+import SingleJournal from './SingleJournal'
 
 function Sidebar() {
   return (
     <div className="h-full w-80 flex flex-col bg-[#24282cc7] text-white border-r rounded-bl-lg">
       {/* HEADER OF THE SIDEBAR */}
       <div className="h-24 flex items-center justify-center ">
-        <h2 className="text-2xl font-semibold">Journal</h2>
+        <h2 className="mt-5 text-2xl font-semibold">Journal</h2>
       </div>
 
       {/* BODY OF THE SIDEBAR */}
       <ScrollArea className="flex-grow py-3">
-        <div className="p-4 ">
+        <div className="p-4 flex flex-col gap-y-2 ">
           {/* Add more content here to test scrolling */}
           {Array(20).fill(0).map((_, i) => (
-            <p key={i} className="mt-4">Additional content to test scrolling.</p>
+            // <p key={i} className="mt-4">Additional content to test scrolling.</p>
+            <SingleJournal />
           ))}
         </div>
       </ScrollArea>
