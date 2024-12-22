@@ -9,9 +9,9 @@ const JournalContextProvider = ({children}: {children: any}) => {
 
     const [allJournals, setAllJournals] = useState<Journal[]>([]);
     const [currentJournal, setCurrentJournal] = useState<Journal>({
-        id: uuidv4(),
-        title: '',
-        content: ''
+      id: '',
+      title: '',
+      content: '',
     });
 
   return (
