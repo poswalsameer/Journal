@@ -28,7 +28,7 @@ function SingleJournal({id, title}: {id: string, title: string}) {
   return (
     <div 
       className={`
-      p-2 w-full flex justify-between gap-x-2 items-center
+      p-2 h-full w-full flex justify-between gap-x-2 items-center
       sm:p-3 sm:w-full sm:flex sm:justify-between sm:items-center bg-gray-600/30 rounded-sm sm:rounded-md hover:cursor-pointer ${ id === currentJournal.id ? "bg-[#383f45]" : "" } `}
       onClick={selectJournal}
       >
