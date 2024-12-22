@@ -1,9 +1,25 @@
+'use client'
+
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Github, Linkedin, Twitter } from 'lucide-react'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid';
+import JournalContext from '../context/JournalContext'
 import SingleJournal from './SingleJournal'
 
 function Sidebar() {
+
+  const context = useContext(JournalContext);
+  if( context === undefined ){
+    throw new Error("Context not found");
+  }
+  const {allJournals, setAllJournals} = context;
+  
+  useEffect( () => {
+    const journalsFromStorage = JSON.parse(localStorage.getItem("allJournals") || "[]");
+    setAllJournals(journalsFromStorage);
+  }, [] )
+
   return (
     <div className="h-full w-80 flex flex-col bg-[#24282cc7] text-white border-r rounded-bl-lg">
       {/* HEADER OF THE SIDEBAR */}
@@ -14,11 +30,11 @@ function Sidebar() {
       {/* BODY OF THE SIDEBAR */}
       <ScrollArea className="flex-grow py-3">
         <div className="p-4 flex flex-col gap-y-2 ">
-          {/* Add more content here to test scrolling */}
-          {Array(20).fill(0).map((_, i) => (
-            // <p key={i} className="mt-4">Additional content to test scrolling.</p>
-            <SingleJournal />
-          ))}
+          {allJournals.map((singleJournal) => 
+          <SingleJournal 
+            key={uuidv4()} 
+            id={singleJournal.id} 
+          />)}
         </div>
       </ScrollArea>
 

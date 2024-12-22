@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { useContext } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -18,6 +18,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { v4 as uuidv4 } from 'uuid';
+import JournalContext from "../context/JournalContext";
+import { Journal, JournalContextType } from "../types/types";
 
 interface BrowserToolbarProps extends React.HTMLAttributes<HTMLDivElement> {
   url?: string;
@@ -28,6 +31,24 @@ export default function Header({
   className,
   ...props
 }: BrowserToolbarProps) {
+
+  const context = useContext(JournalContext);
+
+  if( context === undefined ){
+    throw new Error("Context not found");
+  }
+
+  const { allJournals, setAllJournals, currentJournal, setCurrentJournal } = context;
+
+  const addJournal = () => {
+    // console.log("Size before adding: ", allJournals.length);
+    console.log("Journals: ", allJournals);
+    const newJournal: Journal = { id: uuidv4(), title: "", content: "" };
+    setAllJournals([...allJournals, newJournal]);
+    setCurrentJournal(newJournal)
+    localStorage.setItem("allJournals", JSON.stringify([...allJournals, newJournal]));
+  }
+
   return (
     <div
       className={cn(
@@ -63,7 +84,10 @@ export default function Header({
           <PanelLeft className="h-4 w-4" />
         </Button>
 
-        <Button variant="ghost" size="icon" className="h-8 w-8">
+        <Button 
+          variant="ghost" size="icon" className="h-8 w-8"
+          onClick={addJournal}
+        >
             <Plus className="h-4 w-4" />
         </Button>
 

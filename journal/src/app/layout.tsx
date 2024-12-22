@@ -2,6 +2,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import Header from "./appComponents/Header";
+import JournalContextProvider from "./context/JournalContextProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,6 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <JournalContextProvider>
     <html lang="en">
         <body
           className={outfit.className + ` bg-black m-4 `}
@@ -39,5 +41,6 @@ export default function RootLayout({
           <div>{children}</div>
         </body>
     </html>
+    </JournalContextProvider>
   );
 }
