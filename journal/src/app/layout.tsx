@@ -1,19 +1,8 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Outfit } from "next/font/google";
-import Header from "./appComponents/Header";
+import { Outfit } from "next/font/google";
 import JournalContextProvider from "./context/JournalContextProvider";
+import { Analytics } from '@vercel/analytics/next';
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const outfit = Outfit({
   weight  : "400",
@@ -38,6 +27,7 @@ export default function RootLayout({
           className={outfit.className + ` bg-black m-4 `}
         >
           <div>{children}</div>
+          <Analytics />
         </body>
     </html>
     </JournalContextProvider>
